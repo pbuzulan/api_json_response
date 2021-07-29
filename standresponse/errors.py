@@ -2,9 +2,10 @@ from datetime import datetime
 
 
 class Error(Exception):
-    def __init__(self, state: int, message="", *args):
+    def __init__(self, internal_state: int, http_state: int, message="", *args):
         super(Error, self).__init__(*args)
-        self.state = state
+        self.internal_state = internal_state
+        self.http_state = http_state
         self.message = message
         self.time = datetime.utcnow()
 
@@ -12,4 +13,4 @@ class Error(Exception):
         return self.message
 
     def __repr__(self):
-        return f" State: {self.state}, Message: {self.message}, Time: {self.time}"
+        return f"HTTP State: {self.http_state}, Internal State: {self.internal_state}, Message: {self.message}, Time: {self.time}"
